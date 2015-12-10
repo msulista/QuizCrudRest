@@ -6,6 +6,12 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -13,9 +19,15 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author marcus.rodrigues
  */
 @XmlRootElement
+@Entity
 public class Usuario implements Serializable{
     
+   private static final long serialVersionUID = 1L;
+    @Id
+    @SequenceGenerator(name = "usur_seq", sequenceName = "user_seq", initialValue = 1, allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usur_seq")
     private Integer id;
+    
     private String nome;
     private String telefone;
     private String email;
@@ -81,14 +93,9 @@ public class Usuario implements Serializable{
         this.admin = admin;
     }
     
-    public boolean verificaLogin(String email, String senha){
-        
-        return (this.email.equalsIgnoreCase(email) && this.senha.equalsIgnoreCase(senha));
-    }
-    
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nome=" + nome + ", admin=" + admin + '}';
+        return "Usuario{" + "id = " + id + ", Nome = " + nome + ", Email= " + email + ", Fone= " + telefone + ", Admin= " + admin + '}';
     }
 
     
